@@ -2,7 +2,9 @@ package com.eventscheduler.application.mapper;
 
 import com.eventscheduler.application.dto.EventDTO;
 import com.eventscheduler.domain.model.Event;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EventMapper {
     public Event toEntity(EventDTO dto) {
         Event event = new Event();
