@@ -8,16 +8,15 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class Event {
+public class Booking {
     private Long id;
-    private String title;
-    private String description;
+    private Event event;
+    private Room room;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private User organizer;
-    private List<Booking> bookings;
+    private List<Resource> rentedResources;
 }
