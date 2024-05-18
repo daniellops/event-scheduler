@@ -15,6 +15,5 @@ public class Room {
     private Long id;
     private String name;
     private int capacity;
-    private List<Resource> fixedResources;
-    private List<Resource> rentableResources;
+    private List<Resource> resources;
 }
