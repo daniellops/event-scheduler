@@ -14,6 +14,7 @@ public class Resource {
     private String name;
     private String description;
     private boolean isRentable;
-    private double rentalPrice;
+    private Double pricePerDay;
+    private int quantityAvailable;
     private Room room;
 }

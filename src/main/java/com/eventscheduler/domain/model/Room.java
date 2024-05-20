@@ -15,5 +15,6 @@ public class Room {
     private Long id;
     private String name;
     private int capacity;
+    private Venue venue;
     private List<Resource> resources;
 }

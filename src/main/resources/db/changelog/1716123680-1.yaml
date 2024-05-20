@@ -9,11 +9,117 @@ databaseChangeLog:
         changes:
           - sql:
               sql: >
-                  SELECT 1 AS number;
+                  CREATE TABLE users (
+                      id SERIAL PRIMARY KEY,
+                      username VARCHAR(255) NOT NULL,
+                      email VARCHAR(255) UNIQUE NOT NULL,
+                      password VARCHAR(255) NOT NULL
+                  );
+
+                  CREATE TABLE role (
+                      user_id INTEGER NOT NULL,
+                      role_name VARCHAR(255) NOT NULL,
+                      PRIMARY KEY (user_id, role_name),
+                      FOREIGN KEY (user_id) REFERENCES users (id)
+                  );
+
+                  CREATE TABLE venue (
+                      id SERIAL PRIMARY KEY,
+                      name VARCHAR(255) NOT NULL,
+                      description TEXT,
+                      address TEXT
+                  );
+
+                  CREATE TABLE venue_pricing (
+                      id SERIAL PRIMARY KEY,
+                      venue_id INTEGER NOT NULL,
+                      day_of_week INTEGER NOT NULL,
+                      price_per_hour NUMERIC(10, 2) NOT NULL,
+                      FOREIGN KEY (venue_id) REFERENCES venue (id)
+                  );
+
+                  CREATE TABLE room (
+                      id SERIAL PRIMARY KEY,
+                      name VARCHAR(255) NOT NULL,
+                      capacity INTEGER NOT NULL,
+                      venue_id INTEGER NOT NULL,
+                      FOREIGN KEY (venue_id) REFERENCES venue (id)
+                  );
+
+                  CREATE TABLE resource (
+                      id SERIAL PRIMARY KEY,
+                      name VARCHAR(255) NOT NULL,
+                      description TEXT,
+                      is_rentable BOOLEAN NOT NULL,
+                      price_per_day NUMERIC(10, 2),
+                      quantity_available INTEGER NOT NULL,
+                      room_id INTEGER,
+                      FOREIGN KEY (room_id) REFERENCES room (id)
+                  );
+
+                  CREATE TABLE event (
+                      id SERIAL PRIMARY KEY,
+                      title VARCHAR(255) NOT NULL,
+                      description TEXT,
+                      start_time TIMESTAMP NOT NULL,
+                      end_time TIMESTAMP NOT NULL,
+                      venue_id INTEGER NOT NULL,
+                      status VARCHAR(50) NOT NULL,
+                      FOREIGN KEY (venue_id) REFERENCES venue (id)
+                  );
+
+                  CREATE TABLE quotation (
+                      id SERIAL PRIMARY KEY,
+                      event_id INTEGER NOT NULL,
+                      status VARCHAR(50) NOT NULL,
+                      FOREIGN KEY (event_id) REFERENCES event (id)
+                  );
+
+                  CREATE TABLE quotation_item (
+                      id SERIAL PRIMARY KEY,
+                      quotation_id INTEGER NOT NULL,
+                      resource_id INTEGER NOT NULL,
+                      notes TEXT,
+                      quantity INTEGER NOT NULL,
+                      discount_applied NUMERIC(10, 2),
+                      FOREIGN KEY (quotation_id) REFERENCES quotation (id),
+                      FOREIGN KEY (resource_id) REFERENCES resource (id)
+                  );
+
+                  CREATE TABLE booking (
+                      id SERIAL PRIMARY KEY,
+                      event_id INTEGER NOT NULL,
+                      room_id INTEGER NOT NULL,
+                      start_time TIMESTAMP NOT NULL,
+                      end_time TIMESTAMP NOT NULL,
+                      FOREIGN KEY (event_id) REFERENCES event (id),
+                      FOREIGN KEY (room_id) REFERENCES room (id)
+                  );
+
+                  CREATE TABLE notification (
+                      id SERIAL PRIMARY KEY,
+                      recipient_id INTEGER NOT NULL,
+                      message TEXT NOT NULL,
+                      timestamp TIMESTAMP NOT NULL,
+                      status VARCHAR(50) NOT NULL,
+                      FOREIGN KEY (recipient_id) REFERENCES users (id)
+                  );
           - tagDatabase:
               tag: 1
         rollback:
           - sql:
               sql: >
-                  SELECT 1 AS number;
+                  DROP TABLE IF EXISTS quotation_item;
+                  DROP TABLE IF EXISTS quotation;
+                  DROP TABLE IF EXISTS booking;
+                  DROP TABLE IF EXISTS notification;
+                  DROP TABLE IF EXISTS resource;
+                  DROP TABLE IF EXISTS room;
+                  DROP TABLE IF EXISTS event;
+                  DROP TABLE IF EXISTS venue_pricing;
+
+                  DROP TABLE IF EXISTS venue;
+                  DROP TABLE IF EXISTS users;
+
+                  DROP TABLE IF EXISTS role;
   
