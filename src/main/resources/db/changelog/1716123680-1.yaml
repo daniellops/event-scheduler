@@ -1,0 +1,19 @@
+databaseChangeLog:
+    - logicalFilePath: 1716123680-1.yaml
+
+    - changeSet:
+        logicalFilePath: 1716123680-1.yaml
+        id: 1716123680-1
+        author: Daniel Lopes
+        comment: Template for a change-set using yaml
+        changes:
+          - sql:
+              sql: >
+                  SELECT 1 AS number;
+          - tagDatabase:
+              tag: 1
+        rollback:
+          - sql:
+              sql: >
+                  SELECT 1 AS number;
+  
