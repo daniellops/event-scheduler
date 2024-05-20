@@ -7,14 +7,15 @@ import lombok.Setter;
 
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Room {
+public class Venue {
     private Long id;
     private String name;
-    private int capacity;
-    private Venue venue;
-    private List<Resource> resources;
+    private String description;
+    private String address;
+    private List<Room> rooms;
+    private List<VenuePricing> pricingList;
 }

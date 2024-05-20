@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - includeAll:
+      relativeToChangelogFile: true
+      path: db/changelog
+#      resourceComparator: full path PathVersionComparator
+  - logicalFilePath: path-independent

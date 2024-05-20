@@ -1,20 +1,18 @@
 package com.eventscheduler.domain.model;
 
+import com.eventscheduler.domain.enums.DayOfWeek;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Room {
+public class VenuePricing {
     private Long id;
-    private String name;
-    private int capacity;
     private Venue venue;
-    private List<Resource> resources;
+    private DayOfWeek dayOfWeek;
+    private Double pricePerHour;
 }

@@ -1,5 +1,6 @@
 package com.eventscheduler.domain.model;
 
+import com.eventscheduler.domain.enums.EventStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Event {
     private String description;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private User organizer;
-    private List<Booking> bookings;
+    private Venue venue;
+    private List<Quotation> quotations;
+    private EventStatus status;
 }

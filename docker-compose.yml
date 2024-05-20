@@ -12,18 +12,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  event-scheduler:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/eventscheduler
-      SPRING_DATASOURCE_USERNAME: event
-      SPRING_DATASOURCE_PASSWORD: 123
+#  event-scheduler:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - db
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/eventscheduler
+#      SPRING_DATASOURCE_USERNAME: event
+#      SPRING_DATASOURCE_PASSWORD: 123
 
 volumes:
   postgres_data:
